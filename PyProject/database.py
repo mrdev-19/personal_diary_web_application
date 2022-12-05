@@ -5,8 +5,9 @@ from dotenv import load_dotenv
 #load env var
 
 load_dotenv(".env")
+
 DETA_KEY=os.getenv("DETA_KEY")
-deta=Deta("d0ukwav3_c5Sg1LR6Xy4ZnmdcNx64SJr5nA2RNvdF")
+deta=Deta(DETA_KEY)
 #config env key
 
 cred=deta.Base("AuthInfo")
