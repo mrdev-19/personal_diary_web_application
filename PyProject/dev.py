@@ -3,7 +3,6 @@ from streamlit_option_menu import option_menu
 import database as db
 from datetime import date
 import numpy as np
-from st_aggrid import GridOptionsBuilder, AgGrid, GridUpdateMode, DataReturnMode
 
 #---------------------------------------------------
 # page config settings:
