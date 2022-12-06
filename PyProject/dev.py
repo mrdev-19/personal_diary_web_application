@@ -110,12 +110,14 @@ def main():
                 data=db.fetch_all_entries(st.session_state["curlogin"])
                 df=pd.DataFrame.from_dict(data)
                 st.dataframe(df)        
-                num=int(st.number_input("Enter the Id of the entry you want to delete",step=1,max_value=len(data)))
+                dev=st.button("Clear Recent Entry")
+                num=0
                 #under testing conditions
                 st.session_state.todel=num
                 todelete=data[num]
-                if(len(db.fetch_all_entries(st.session_state["curlogin"]))>num):
-                    db.delete_entry(todelete["Entry"])
+                if(dev):
+                        if(len(db.fetch_all_entries(st.session_state["curlogin"]))>num):
+                                db.delete_entry(todelete["Entry"])
             else:
                 st.warning("No Data to work on !!!")
 
