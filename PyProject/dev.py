@@ -3,6 +3,7 @@ from streamlit_option_menu import option_menu
 import database as db
 from datetime import date
 import numpy as np
+from st_aggrid import GridOptionsBuilder, AgGrid, GridUpdateMode, DataReturnMode
 
 #---------------------------------------------------
 # page config settings:
@@ -52,7 +53,7 @@ def log_sign():
                         st.experimental_rerun()
                     else:
                         st.error("Please check your username / password ")
-            
+
     elif(selected=="signup"):
         with st.form("Sign Up",clear_on_submit=True):
             st.header("Sign Up")
@@ -109,18 +110,15 @@ def main():
             if(bool(data)):
                 data=db.fetch_all_entries(st.session_state["curlogin"])
                 df=pd.DataFrame.from_dict(data)
-                st.dataframe(df)        
+                st.dataframe(df) 
                 dev=st.button("Clear Recent Entry")
-                num=0
-                #under testing conditions
-                st.session_state.todel=num
-                todelete=data[num]
                 if(dev):
-                        if(len(db.fetch_all_entries(st.session_state["curlogin"]))>num):
-                                db.delete_entry(todelete["Entry"])
+                    num=0
+                    x=data[num]
+                    if(len(db.fetch_all_entries(st.session_state["curlogin"]))>num):
+                        db.deleteinfo(x["Key"])
             else:
                 st.warning("No Data to work on !!!")
-
 
 #--------------------------------------------------
 
